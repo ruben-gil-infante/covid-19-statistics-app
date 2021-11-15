@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApiProvinceItem {
 
+    @SerializedName("iso")
+    private String iso;
+
     @SerializedName("name")
     private String name;
     
@@ -15,6 +18,12 @@ public class ApiProvinceItem {
     
     @SerializedName("long")
     private String logt;
+
+    public String getIso() { return iso; }
+
+    public void setIso(String iso) {
+        this.iso = iso;
+    }
 
     public String getName() {
         return name;

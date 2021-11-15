@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class constants {
 
-    public static final String BASE_URL = "https://covid-19-statistics.p.rapidapi.com/";
+    public static final String BASE_URL = "https://covid-19-statistics.p.rapidapi.com";
 
     private static final String API_KEY = "apiKey";
     private static final String API_HOST = "apiHost";

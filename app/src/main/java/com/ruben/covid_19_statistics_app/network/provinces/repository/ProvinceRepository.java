@@ -8,6 +8,7 @@ import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvince;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProvinceRepository {
 
@@ -17,6 +18,7 @@ public class ProvinceRepository {
     private ProvinceRepository() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(constants.BASE_URL) // TODO: Create newtorkConstants.class instead of constants
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         provinceDataSource = retrofit.create(ProvinceDataSource.class);
@@ -30,6 +32,7 @@ public class ProvinceRepository {
     }
 
     public Call<ApiProvince> getAllProvinces() {
-        return provinceDataSource.getAllProvinces();
+        // TODO: Avoid to force the province to be spain
+        return provinceDataSource.getAllProvinces("ESP");
     }
 }

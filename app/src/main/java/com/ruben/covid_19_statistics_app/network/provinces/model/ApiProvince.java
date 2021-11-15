@@ -7,13 +7,13 @@ import java.util.List;
 public class ApiProvince {
     
     @SerializedName("data")
-    private List<ApiProvince> apiProvinceList;
+    private List<ApiProvinceItem> apiProvinceList;
 
-    public List<ApiProvince> getApiProvinceList() {
+    public List<ApiProvinceItem> getApiProvinceList() {
         return apiProvinceList;
     }
 
-    public void setApiProvinceList(List<ApiProvince> apiProvinceList) {
+    public void setApiProvinceList(List<ApiProvinceItem> apiProvinceList) {
         this.apiProvinceList = apiProvinceList;
     }
 }
