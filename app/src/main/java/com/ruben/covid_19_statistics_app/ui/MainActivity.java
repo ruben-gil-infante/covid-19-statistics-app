@@ -4,16 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import com.ruben.covid_19_statistics_app.R;
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvince;
+import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegions;
 import com.ruben.covid_19_statistics_app.useCases.GetAllProvincesUseCase;
+import com.ruben.covid_19_statistics_app.useCases.GetRegionsUseCase;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeTheRequestsExample() {
+        // Get Provinces
         GetAllProvincesUseCase getAllProvincesUseCase = new GetAllProvincesUseCase();
         getAllProvincesUseCase.getAllProvincesUseCase().enqueue(new Callback<ApiProvince>() {
             @Override
@@ -54,5 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 int stopToDebug = 0;
             }
         });
+
+        // Get Regions
+        GetRegionsUseCase getRegionsUseCase = new GetRegionsUseCase();
+        getRegionsUseCase.getAllRegions().enqueue(new Callback<ApiRegions>() {
+            @Override
+            public void onResponse(Call<ApiRegions> call, Response<ApiRegions> response) {
+                int stopToDebug = 0;
+            }
+
+            @Override
+            public void onFailure(Call<ApiRegions> call, Throwable t) {
+                int stopToDebug = 0;
+            }
+        });
+
     }
 }

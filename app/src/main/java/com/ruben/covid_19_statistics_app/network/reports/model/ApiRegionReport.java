@@ -1,4 +1,4 @@
-package com.ruben.covid_19_statistics_app.network.reports.repository;
+package com.ruben.covid_19_statistics_app.network.reports.model;
 
 import com.google.gson.annotations.SerializedName;
 
