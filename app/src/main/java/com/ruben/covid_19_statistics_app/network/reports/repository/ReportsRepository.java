@@ -1,8 +1,8 @@
 package com.ruben.covid_19_statistics_app.network.reports.repository;
 
 import com.ruben.covid_19_statistics_app.network.builder.RetrofitBuilder;
+import com.ruben.covid_19_statistics_app.network.datasource.GlobalDataSource;
 import com.ruben.covid_19_statistics_app.network.utils.NetworkUtils;
-import com.ruben.covid_19_statistics_app.network.reports.datasource.ReportsDataSource;
 import com.ruben.covid_19_statistics_app.network.reports.model.ApiReports;
 
 import retrofit2.Call;
@@ -10,10 +10,10 @@ import retrofit2.Call;
 public class ReportsRepository {
 
     private static ReportsRepository instance;
-    private ReportsDataSource reportsDataSource;
+    private GlobalDataSource reportsDataSource;
 
     private ReportsRepository() {
-        reportsDataSource = RetrofitBuilder.getRetrofitInstance().create(ReportsDataSource.class);
+        reportsDataSource = RetrofitBuilder.getRetrofitInstance().create(GlobalDataSource.class);
     }
 
     public static ReportsRepository getInstance() {
