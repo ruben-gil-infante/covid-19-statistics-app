@@ -2,7 +2,7 @@ package com.ruben.covid_19_statistics_app.network.provinces.repository;
 
 
 import com.ruben.covid_19_statistics_app.network.builder.RetrofitBuilder;
-import com.ruben.covid_19_statistics_app.network.networkUtils.NetworkUtils;
+import com.ruben.covid_19_statistics_app.network.utils.NetworkUtils;
 import com.ruben.covid_19_statistics_app.network.provinces.datasource.ProvinceDataSource;
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvince;
 

@@ -1,7 +1,7 @@
 package com.ruben.covid_19_statistics_app.network.regions.repository;
 
 import com.ruben.covid_19_statistics_app.network.builder.RetrofitBuilder;
-import com.ruben.covid_19_statistics_app.network.networkUtils.NetworkUtils;
+import com.ruben.covid_19_statistics_app.network.utils.NetworkUtils;
 import com.ruben.covid_19_statistics_app.network.regions.datasource.RegionsDataSource;
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegions;
 

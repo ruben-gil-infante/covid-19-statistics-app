@@ -1,4 +1,4 @@
-package com.ruben.covid_19_statistics_app.network.networkUtils;
+package com.ruben.covid_19_statistics_app.network.utils;
 
 import com.ruben.covid_19_statistics_app.BuildConfig;
 
