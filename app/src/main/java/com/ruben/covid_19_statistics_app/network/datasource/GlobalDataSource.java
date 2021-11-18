@@ -15,10 +15,6 @@ import retrofit2.http.Query;
 public interface GlobalDataSource {
 
     @GET("/provinces")
-    @Headers({
-            "x-rapidapi-host: covid-19-statistics.p.rapidapi.com",
-            "x-rapidapi-key: 27aa06345fmsh8f4bfc85f8d8f7dp1ba148jsn9b86ffbf73f8"
-    })
     Call<ApiProvince> getAllProvinces(@HeaderMap Map<String,String> headers, @Query("iso") String iso);
 
     @GET("/regions")
