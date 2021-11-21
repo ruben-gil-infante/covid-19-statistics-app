@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 public class ListWithFinderRecyclerViewAdapter extends RecyclerView.Adapter<ListWithFinderRecyclerViewAdapter.ListViewHolder> {
 
-    private ArrayList<String> items;
+    private ArrayList<ListWithFinderItem> items;
     private IOnListWithFinderItemClicked listWithFinderItemClicked;
 
-    public ListWithFinderRecyclerViewAdapter(ArrayList<String> items, IOnListWithFinderItemClicked listWithFinderItemClicked) {
+    public ListWithFinderRecyclerViewAdapter(ArrayList<ListWithFinderItem> items, IOnListWithFinderItemClicked listWithFinderItemClicked) {
         this.items = items;
         this.listWithFinderItemClicked = listWithFinderItemClicked;
     }
@@ -33,8 +33,8 @@ public class ListWithFinderRecyclerViewAdapter extends RecyclerView.Adapter<List
 
     @Override
     public void onBindViewHolder(@NonNull ListWithFinderRecyclerViewAdapter.ListViewHolder holder, int position) {
-        holder.setPosition(position);
-        holder.bindItem(items.get(position));
+        holder.setListWithFinderItem(items.get(position));
+        holder.setInfo();
     }
 
     @Override
@@ -46,7 +46,8 @@ public class ListWithFinderRecyclerViewAdapter extends RecyclerView.Adapter<List
 
         private TextView tvItemName;
         private View root;
-        int position;
+        private ListWithFinderItem item;
+
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,21 +56,21 @@ public class ListWithFinderRecyclerViewAdapter extends RecyclerView.Adapter<List
             setListeners();
         }
 
-        public void setPosition(int position) {
-            this.position = position;
+        public void setListWithFinderItem(ListWithFinderItem item) {
+            this.item = item;
         }
 
         private void setListeners() {
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listWithFinderItemClicked.onItemSelected(position);
+                    listWithFinderItemClicked.onItemSelected(item.getOriginalPosition());
                 }
             });
         }
 
-        public void bindItem(String item) {
-            tvItemName.setText(item);
+        public void setInfo() {
+            tvItemName.setText(item.getText());
         }
     }
 }

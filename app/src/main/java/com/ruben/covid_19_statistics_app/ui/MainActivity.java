@@ -2,6 +2,7 @@ package com.ruben.covid_19_statistics_app.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.icu.text.Edits;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegions;
 import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.IOnListWithFinderItemClicked;
 import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinder;
+import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinderItem;
 import com.ruben.covid_19_statistics_app.useCases.GetRegionsUseCase;
 
 import java.util.ArrayList;
@@ -54,14 +56,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeTheRequestsExample() {
-        // Get Regions
         requestBtn.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         GetRegionsUseCase getRegionsUseCase = new GetRegionsUseCase();
         getRegionsUseCase.getAllRegions().enqueue(new Callback<ApiRegions>() {
             @Override
             public void onResponse(Call<ApiRegions> call, Response<ApiRegions> response) {
-                int stopToDebug = 0;
                 progressBar.setVisibility(View.GONE);
                 setUpListWithFinderComponent(response.body());
             }
@@ -74,10 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpListWithFinderComponent(ApiRegions regions) {
-        ArrayList<String> itemsToList = new ArrayList<>();
-        for(ApiRegionItem item : regions.getApiRegionItemList()) {
-            itemsToList.add(item.getName());
+        ArrayList<ListWithFinderItem> itemsToList = new ArrayList<>();
+
+        for (int i = 0; i < regions.getApiRegionItemList().size(); i++) {
+            ApiRegionItem regionItem = regions.getApiRegionItemList().get(i);
+            itemsToList.add(ListWithFinderItem.Build(regionItem.getName(), i));
         }
+
         listWithFinder.setData(itemsToList, new IOnListWithFinderItemClicked() {
             @Override
             public void onItemSelected(int position) {
