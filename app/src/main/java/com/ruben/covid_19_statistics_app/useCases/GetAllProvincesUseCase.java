@@ -13,8 +13,8 @@ public class GetAllProvincesUseCase {
         provinceRepository = ProvinceRepository.getInstance();
     }
 
-    public Call<ApiProvince> getAllProvincesUseCase() {
-        return provinceRepository.getAllProvinces();
+    public Call<ApiProvince> getAllProvincesUseCase(String iso) {
+        return provinceRepository.getAllProvinces(iso);
     }
         
 

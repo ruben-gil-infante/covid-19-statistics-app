@@ -21,8 +21,7 @@ public class ProvinceRepository {
         return instance == null ? new ProvinceRepository() : instance;
     }
 
-    public Call<ApiProvince> getAllProvinces() {
-        // TODO: Avoid to force the province to be spain
-        return globalDataSource.getAllProvinces(NetworkUtils.getHeaders(), "ESP");
+    public Call<ApiProvince> getAllProvinces(String iso) {
+        return globalDataSource.getAllProvinces(NetworkUtils.getHeaders(), iso);
     }
 }
