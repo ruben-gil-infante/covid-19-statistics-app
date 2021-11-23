@@ -1,26 +1,26 @@
-package com.ruben.covid_19_statistics_app.ui;
+package com.ruben.covid_19_statistics_app.ui.views;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.ruben.covid_19_statistics_app.R;
+import com.ruben.covid_19_statistics_app.constants.AppConstants;
 import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.IOnListWithFinderItemClicked;
 import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinder;
-import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinderItem;
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
-import com.ruben.covid_19_statistics_app.viewmodels.RegionsViewModel;
+import com.ruben.covid_19_statistics_app.ui.viewmodels.RegionsViewModel;
 
 public class RegionsFragment extends Fragment implements IOnListWithFinderItemClicked {
 
@@ -92,6 +92,12 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
 
     @Override
     public void onItemSelected(int position) {
-
+        String iso = mViewModel.countrySelected(position);
+        Bundle args = new Bundle();
+        args.putString(AppConstants.ISO_KEY, iso);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_main_frame_layout, ProvinceFragment.class, args, null)
+                .commit();
     }
 }

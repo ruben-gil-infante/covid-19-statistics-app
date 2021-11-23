@@ -1,21 +1,17 @@
-package com.ruben.covid_19_statistics_app.viewmodels;
+package com.ruben.covid_19_statistics_app.ui.viewmodels;
 
 
-import android.util.Log;
-import android.view.View;
+import android.content.Context;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegions;
-import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.IOnListWithFinderItemClicked;
 import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinderItem;
 import com.ruben.covid_19_statistics_app.useCases.GetRegionsUseCase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +23,8 @@ public class RegionsViewModel extends ViewModel {
     private MutableLiveData<Boolean> errorLayout;
     private GetRegionsUseCase regionsUseCase;
     private MutableLiveData<ArrayList<ListWithFinderItem>> finderItemsList;
+    private ApiRegions noMutableRegionsList;
+    private Context ctx;
 
     public RegionsViewModel() {
         progressBar = new MutableLiveData<>();
@@ -34,6 +32,8 @@ public class RegionsViewModel extends ViewModel {
         errorLayout = new MutableLiveData<>();
         finderItemsList = new MutableLiveData<>();
     }
+
+    public void setContext(Context ctx) { this.ctx = ctx; }
 
     public MutableLiveData<Boolean> getProgressBar() {
         return progressBar;
@@ -53,8 +53,7 @@ public class RegionsViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ApiRegions> call, Response<ApiRegions> response) {
                 progressBar.postValue(false);
-                // setUpListWithFinderComponent(response.body());
-                errorLayout.postValue(true);
+                setUpListWithFinderComponent(response.body());
             }
 
             @Override
@@ -66,6 +65,7 @@ public class RegionsViewModel extends ViewModel {
     }
 
     private void setUpListWithFinderComponent(ApiRegions regions) {
+        noMutableRegionsList = regions;
         ArrayList<ListWithFinderItem> itemsToListBuilder = new ArrayList<>();
 
         for (int i = 0; i < regions.getApiRegionItemList().size(); i++) {
@@ -74,6 +74,10 @@ public class RegionsViewModel extends ViewModel {
         }
 
         finderItemsList.postValue(itemsToListBuilder);
+    }
+
+    public String countrySelected(int position) {
+        return noMutableRegionsList.getApiRegionItemList().get(position).getIso();
     }
 
 }
