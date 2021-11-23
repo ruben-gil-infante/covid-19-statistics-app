@@ -9,7 +9,6 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,7 +26,7 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
     private static final String TAG = "RegionsFragment";
 
     private ListWithFinder listWithFinder;
-    private RegionsViewModel mViewModel;
+    private RegionsViewModel reportViewModel;
     private ProgressBar progressBar;
     private ErrorLayout errorLayout;
     private View root;
@@ -41,11 +40,11 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.regions_fragment, container, false);
-        mViewModel = new ViewModelProvider((ViewModelStoreOwner) this, new ViewModelProvider.NewInstanceFactory()).get(RegionsViewModel.class);
+        reportViewModel = new ViewModelProvider((ViewModelStoreOwner) this, new ViewModelProvider.NewInstanceFactory()).get(RegionsViewModel.class);
         bindViews();
         setListeners();
         prepareErrorLayout();
-        mViewModel.getAllRegions();
+        reportViewModel.getAllRegions();
         return root;
     }
 
@@ -61,12 +60,12 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
     }
 
     private void setListeners() {
-        mViewModel.getFinderItemsList().observe((LifecycleOwner) this, list -> {
+        reportViewModel.getFinderItemsList().observe((LifecycleOwner) this, list -> {
             listWithFinder.setData(list, this);
             listWithFinder.setVisibility(View.VISIBLE);
         });
 
-        mViewModel.getProgressBar().observe((LifecycleOwner) this, showPrgoressBar -> {
+        reportViewModel.getProgressBar().observe((LifecycleOwner) this, showPrgoressBar -> {
             if(showPrgoressBar) {
                 progressBar.setVisibility(View.VISIBLE);
             } else {
@@ -74,7 +73,7 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
             }
         });
 
-        mViewModel.getErrorLayout().observe((LifecycleOwner) this, showErrorLayout -> {
+        reportViewModel.getErrorLayout().observe((LifecycleOwner) this, showErrorLayout -> {
             if(showErrorLayout) {
                 errorLayout.setVisibility(View.VISIBLE);
             }
@@ -92,7 +91,7 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
 
     @Override
     public void onItemSelected(int position) {
-        String iso = mViewModel.countrySelected(position);
+        String iso = reportViewModel.countrySelected(position);
         Bundle args = new Bundle();
         args.putString(AppConstants.ISO_KEY, iso);
         getActivity().getSupportFragmentManager()

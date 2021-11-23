@@ -2,20 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp">
+        app:cardElevation="10dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -26,15 +27,85 @@
             android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/province_item_province_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Beijing"
-                android:textSize="20dp"
-                android:textAlignment="textStart"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/black"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="18dp"
+                    android:textAlignment="textStart"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:text="Name"/>
+
+                <TextView
+                    android:id="@+id/province_item_province_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Beijing"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:textAlignment="textStart"
+                    android:text="Lat"
+                    />
+
+                <TextView
+                    android:id="@+id/province_list_item_latitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:textAlignment="textStart"
+                    android:text="Long"
+                    />
+
+                <TextView
+                    android:id="@+id/province_list_item_logintude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

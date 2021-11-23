@@ -14,10 +14,10 @@ public class ApiProvinceItem {
     private String province;
     
     @SerializedName("lat")
-    private String lat;
+    private String latitude;
     
     @SerializedName("long")
-    private String logt;
+    private String longitude;
 
     public String getIso() { return iso; }
 
@@ -41,19 +41,19 @@ public class ApiProvinceItem {
         this.province = province;
     }
 
-    public String getLat() {
-        return lat;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setLat(String lat) {
-        this.lat = lat;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public String getLogt() {
-        return logt;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setLogt(String logt) {
-        this.logt = logt;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

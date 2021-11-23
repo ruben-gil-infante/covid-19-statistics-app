@@ -14,9 +14,7 @@ public class GetReportsUseCase {
         reportsRepository = ReportsRepository.getInstance();
     }
 
-    public Call<ApiReports> getReports(String date, String q, String regionName,
-                                       String iso, String regionProvince, String cityName) {
-        return reportsRepository.getReports(date, q,
-            regionName, iso, regionProvince, cityName); }
+    public Call<ApiReports> getReports(String date, String regionProvince) {
+        return reportsRepository.getReports(date, regionProvince); }
 
 }

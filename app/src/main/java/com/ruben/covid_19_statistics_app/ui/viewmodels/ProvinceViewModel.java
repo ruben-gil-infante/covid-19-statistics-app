@@ -19,7 +19,7 @@ public class ProvinceViewModel extends ViewModel {
 
     private GetAllProvincesUseCase provincesUseCase;
     private MutableLiveData<Boolean> showProgressBar;
-    private MutableLiveData<ArrayList<String>> provincesList;
+    private MutableLiveData<List<ApiProvinceItem>> provincesList;
     private List<ApiProvinceItem> noMutableProvinceList;
     private String iso;
 
@@ -33,7 +33,7 @@ public class ProvinceViewModel extends ViewModel {
         return showProgressBar;
     }
 
-    public MutableLiveData<ArrayList<String>> getProvinceList() {
+    public MutableLiveData<List<ApiProvinceItem>> getProvinceList() {
         return provincesList;
     }
 
@@ -47,8 +47,7 @@ public class ProvinceViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ApiProvince> call, Response<ApiProvince> response) {
                 showProgressBar.postValue(false);
-                noMutableProvinceList = response.body().getApiProvinceList();
-                transformData();
+                provincesList.postValue(response.body().getApiProvinceList());
             }
 
             @Override
@@ -58,14 +57,4 @@ public class ProvinceViewModel extends ViewModel {
             }
         });
     }
-
-    private void transformData() {
-        ArrayList<String> provincesName = new ArrayList<>();
-
-        for(ApiProvinceItem item : noMutableProvinceList) {
-            provincesName.add(item.getProvince());
-        }
-        provincesList.postValue(provincesName);
-    }
-
 }

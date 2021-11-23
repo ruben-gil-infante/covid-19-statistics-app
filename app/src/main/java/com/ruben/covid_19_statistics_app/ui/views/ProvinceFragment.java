@@ -20,11 +20,10 @@ import com.ruben.covid_19_statistics_app.ui.adapters.ProvinceListAdapter;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ProvinceViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProvinceFragment extends Fragment {
 
-    private ProvinceViewModel mViewModel;
+    private ProvinceViewModel provinceViewModel;
     private ProgressBar progressBar;
     private View root;
     private String iso;
@@ -38,7 +37,7 @@ public class ProvinceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.province_fragment, container, false);
-        mViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ProvinceViewModel.class);
+        provinceViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ProvinceViewModel.class);
         bindViews();
         setListeners();
         setObservables();
@@ -59,7 +58,7 @@ public class ProvinceFragment extends Fragment {
     }
 
     private void setObservables() {
-        mViewModel.getShowProgressBar().observe(getViewLifecycleOwner(), showProgressBar -> {
+        provinceViewModel.getShowProgressBar().observe(getViewLifecycleOwner(), showProgressBar -> {
             if(showProgressBar) {
                 progressBar.setVisibility(View.VISIBLE);
             } else {
@@ -67,21 +66,23 @@ public class ProvinceFragment extends Fragment {
             }
         });
 
-        mViewModel.getProvinceList().observe(getViewLifecycleOwner(), provinceList -> {
-            setProvincesRecyclerView(provinceList);
+        provinceViewModel.getProvinceList().observe(getViewLifecycleOwner(), provinceList -> {
+            setProvincesRecyclerView((ArrayList<ApiProvinceItem>) provinceList);
         });
     }
 
     private void getData() {
-        mViewModel.getAllProvincesFromCountry(iso);
+        provinceViewModel.getAllProvincesFromCountry(iso);
     }
 
-    private void setProvincesRecyclerView(ArrayList<String> provincesName) {
+    private void setProvincesRecyclerView(ArrayList<ApiProvinceItem> provincesName) {
         ProvinceListAdapter adapter = new ProvinceListAdapter(provincesName);
         provinceListRecyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         provinceListRecyclerView.setLayoutManager(layoutManager);
     }
+
+
 
 }

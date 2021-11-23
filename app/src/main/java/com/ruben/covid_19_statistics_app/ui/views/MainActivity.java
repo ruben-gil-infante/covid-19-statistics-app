@@ -21,4 +21,10 @@ public class MainActivity extends AppCompatActivity {
                 add(R.id.activity_main_frame_layout, RegionsFragment.class, null, "RegionsFragment").
                 commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        // TODO: Implement the navigation between fragments
+        super.onBackPressed();
+    }
 }

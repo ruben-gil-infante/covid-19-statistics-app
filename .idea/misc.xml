@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.2140625" />
+        <entry key="app/src/main/res/drawable/find_toolbar_shape.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1539855072463768" />
+        <entry key="app/src/main/res/layout/custom_spinner.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/error_layout_ui_component.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/fragment_province.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/fragment_region.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_with_finder_layout.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/province_fragment.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/province_list_item.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/province_selector_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/region_selector_fragment.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/regions_fragment.xml" value="0.19791666666666666" />
+        <entry key="uicomponents/src/main/res/layout/custom_spinner_layout.xml" value="0.19791666666666666" />
+        <entry key="uicomponents/src/main/res/xml/custom_spinner.xml" value="0.19791666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
