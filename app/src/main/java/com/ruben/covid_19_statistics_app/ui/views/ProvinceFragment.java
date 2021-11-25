@@ -21,7 +21,7 @@ import com.ruben.covid_19_statistics_app.ui.viewmodels.ProvinceViewModel;
 
 import java.util.ArrayList;
 
-public class ProvinceFragment extends Fragment {
+public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IOnProvinceSelected {
 
     private ProvinceViewModel provinceViewModel;
     private ProgressBar progressBar;
@@ -76,7 +76,7 @@ public class ProvinceFragment extends Fragment {
     }
 
     private void setProvincesRecyclerView(ArrayList<ApiProvinceItem> provincesName) {
-        ProvinceListAdapter adapter = new ProvinceListAdapter(provincesName);
+        ProvinceListAdapter adapter = new ProvinceListAdapter(provincesName, this);
         provinceListRecyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -84,5 +84,14 @@ public class ProvinceFragment extends Fragment {
     }
 
 
-
+    @Override
+    public void selectedProvince(String provinceName) {
+        Bundle args = new Bundle();
+        args.putString(AppConstants.ISO_KEY, iso);
+        args.putString(AppConstants.PROVINCE_NAME_KEY, provinceName);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_main_frame_layout, ReportsFragment.class, args, null)
+                .commit();
+    }
 }

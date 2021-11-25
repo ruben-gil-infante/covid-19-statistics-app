@@ -18,9 +18,11 @@ import java.util.ArrayList;
 public class ProvinceListAdapter extends RecyclerView.Adapter<ProvinceListAdapter.ViewHolder> {
 
     private ArrayList<ApiProvinceItem> provinceItemList;
+    private IOnProvinceSelected onProvinceSelected;
 
-    public ProvinceListAdapter(ArrayList<ApiProvinceItem> provinceItemList) {
+    public ProvinceListAdapter(ArrayList<ApiProvinceItem> provinceItemList, IOnProvinceSelected onProvinceSelected) {
         this.provinceItemList = provinceItemList;
+        this.onProvinceSelected = onProvinceSelected;
     }
 
 
@@ -28,7 +30,7 @@ public class ProvinceListAdapter extends RecyclerView.Adapter<ProvinceListAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.province_list_item, parent, false);
-        ViewHolder vh = new ViewHolder(root);
+        ViewHolder vh = new ViewHolder(root, onProvinceSelected);
         return vh;
     }
 
@@ -44,15 +46,20 @@ public class ProvinceListAdapter extends RecyclerView.Adapter<ProvinceListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        private View root;
         private TextView tvProvinceName;
         private TextView tvLatitude;
         private TextView tvLongitude;
+        private IOnProvinceSelected onProvinceSelected;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, IOnProvinceSelected provinceSelected) {
             super(itemView);
+            root = itemView;
             tvProvinceName = itemView.findViewById(R.id.province_item_province_name);
             tvLatitude = itemView.findViewById(R.id.province_list_item_latitude);
             tvLongitude = itemView.findViewById(R.id.province_list_item_logintude);
+            onProvinceSelected = provinceSelected;
+            setListeners();
         }
 
         public void bindItem(ApiProvinceItem apiProvinceItem) {
@@ -60,5 +67,18 @@ public class ProvinceListAdapter extends RecyclerView.Adapter<ProvinceListAdapte
             tvLatitude.setText(apiProvinceItem.getLatitude());
             tvLongitude.setText(apiProvinceItem.getLongitude());
         }
+
+        private void setListeners() {
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onProvinceSelected.selectedProvince(tvProvinceName.getText().toString());
+                }
+            });
+        }
+    }
+
+    public interface IOnProvinceSelected {
+        void selectedProvince(String provinceName);
     }
 }

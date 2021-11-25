@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ruben.covid_19_statistics_app.R;
+import com.ruben.covid_19_statistics_app.constants.AppConstants;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ReportsViewModel;
 
 public class ReportsFragment extends Fragment {
 
     private ReportsViewModel reportsViewModel;
     private View root;
+    private String regionProvince;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -30,6 +32,10 @@ public class ReportsFragment extends Fragment {
         bindViews();
         setListeners();
         setObservables();
+        if(getArguments() != null) {
+            regionProvince = getArguments().getString(AppConstants.PROVINCE_NAME_KEY);
+        }
+        getData();
         return root;
     }
 
@@ -43,6 +49,10 @@ public class ReportsFragment extends Fragment {
 
     private void setObservables() {
 
+    }
+
+    private void getData() {
+        reportsViewModel.getReport("2021-11-23", regionProvince);
     }
 
 }
