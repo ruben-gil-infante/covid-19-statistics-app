@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp">
+    android:layout_marginLeft="20dp"
+    android:background="@color/app_background">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/list_with_finder_layout_find_toolbar_card_view"
@@ -12,13 +13,26 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/toolbar_background"
+        android:backgroundTint="@color/toolbar_background"
+        android:layout_marginTop="30dp">
 
         <EditText
             android:id="@+id/list_with_finder_layout_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduce here the text..."/>
+            android:hint="Country..."
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textColor="@color/field"
+            android:background="@drawable/list_finder_shape"
+            android:textColorHint="@color/field_secondary"
+            android:drawableEnd="@drawable/ic_toolbar_search"
+            android:drawableTint="@color/field"
+            />
 
     </androidx.cardview.widget.CardView>
 
@@ -29,6 +43,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/list_with_finder_layout_find_toolbar_card_view"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

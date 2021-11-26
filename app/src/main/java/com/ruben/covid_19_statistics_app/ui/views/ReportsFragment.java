@@ -27,7 +27,7 @@ public class ReportsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.region_fragment, container, false);
+        root = inflater.inflate(R.layout.report_fragment, container, false);
         reportsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ReportsViewModel.class);
         bindViews();
         setListeners();

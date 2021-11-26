@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/app_background"
     tools:context=".ui.views.ProvinceFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +20,9 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/progress_bar"
             />
 
         <androidx.recyclerview.widget.RecyclerView

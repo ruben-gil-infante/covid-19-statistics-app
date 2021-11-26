@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.views.RegionsFragment">
+    tools:context=".ui.views.RegionsFragment"
+    android:background="@color/app_background">
 
     <ProgressBar
         android:id="@+id/regions_fragment_progress_bar"
@@ -12,6 +13,9 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:visibility="visible"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/progress_bar"
         />
 
     <com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinder

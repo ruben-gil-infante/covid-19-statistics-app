@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red_error">#d32f2f</color>
     <color name="blue">#2196f3</color>
+    <color name="app_background">#072e47</color>
+    <color name="progress_bar">#f28c0f</color>
+    <color name="cardview_color">#0f446e</color>
+    <color name="field">#cf5a1f</color>
+    <color name="field_secondary">#a1481b</color>
+    <color name="toolbar_background">#122336</color>
 </resources>

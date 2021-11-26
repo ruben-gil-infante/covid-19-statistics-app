@@ -26,7 +26,7 @@ public class ListWithFinderRecyclerViewAdapter extends RecyclerView.Adapter<List
     @NonNull
     @Override
     public ListWithFinderRecyclerViewAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_with_finder_item, parent, false);
         ListViewHolder listViewHolder = new ListViewHolder(view);
         return listViewHolder;
     }
