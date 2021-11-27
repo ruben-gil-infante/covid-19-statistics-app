@@ -20,8 +20,8 @@ public class ReportsRepository {
         return instance == null ? new ReportsRepository(): instance;
     }
 
-    public Call<ApiReports> getReports(String date, String regionProvince) {
-        return reportsDataSource.getReports(NetworkUtils.getHeaders(), date, regionProvince);
+    public Call<ApiReports> getReports(String iso, String date, String regionProvince) {
+        return reportsDataSource.getReports(NetworkUtils.getHeaders(), iso, date, regionProvince);
     }
 
 }

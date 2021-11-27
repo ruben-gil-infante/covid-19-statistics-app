@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Covid19statisticsapp">
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAlaqKgkUje_5qbGabX_1ZdXqiu6H6rkn8" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.

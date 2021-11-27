@@ -23,6 +23,7 @@ public interface GlobalDataSource {
 
     @GET("/reports")
     Call<ApiReports> getReports(@HeaderMap Map<String, String> headers,
+                                @Query("iso") String iso,
                                 @Query("date") String date,
                                 @Query("region_province") String regionProvince);
 

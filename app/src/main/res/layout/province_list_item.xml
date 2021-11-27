@@ -66,6 +66,7 @@
                     android:layout_weight="1"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
+                    android:text="12.455"
                     />
             </LinearLayout>
 
@@ -94,6 +95,7 @@
                     android:layout_weight="1"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
+                    android:text="203.123"
                     />
             </LinearLayout>
 

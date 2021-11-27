@@ -85,10 +85,12 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
 
 
     @Override
-    public void selectedProvince(String provinceName) {
+    public void selectedProvince(String provinceName, String latitude, String longitude) {
         Bundle args = new Bundle();
         args.putString(AppConstants.ISO_KEY, iso);
         args.putString(AppConstants.PROVINCE_NAME_KEY, provinceName);
+        args.putString(AppConstants.LATITUDE_KEY, latitude);
+        args.putString(AppConstants.LONGITUDE_KEY, longitude);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_main_frame_layout, ReportsFragment.class, args, null)

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruben.covid_19_statistics_app.R;
+import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvince;
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvinceItem;
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 
@@ -81,13 +82,15 @@ public class ProvinceListAdapter extends RecyclerView.Adapter<ProvinceListAdapte
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onProvinceSelected.selectedProvince(tvProvinceName.getText().toString());
+                    // TODO: Improve the code of this class...
+                    onProvinceSelected.selectedProvince(tvProvinceName.getText().toString(),
+                            tvLatitude.getText().toString(), tvLongitude.getText().toString());
                 }
             });
         }
     }
 
     public interface IOnProvinceSelected {
-        void selectedProvince(String provinceName);
+        void selectedProvince(String provinceName, String latitude, String longitude);
     }
 }
