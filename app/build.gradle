@@ -64,4 +64,12 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.16'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
     compileOnly 'com.google.android.wearable:wearable:2.8.1'
+
+    // Retrofit interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    // Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
 }

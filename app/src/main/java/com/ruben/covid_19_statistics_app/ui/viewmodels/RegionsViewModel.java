@@ -48,6 +48,7 @@ public class RegionsViewModel extends ViewModel {
     }
 
     public void getAllRegions() {
+        errorLayout.postValue(false);
         progressBar.postValue(true);
         regionsUseCase.getAllRegions().enqueue(new Callback<ApiRegions>() {
             @Override

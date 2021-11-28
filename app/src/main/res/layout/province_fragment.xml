@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ProgressBar
-            android:id="@+id/province_fragment_progress_bar"
+            android:id="@+id/report_fragment_progress_bar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,13 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:visibility="gone"/>
+
+        <com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout
+            android:id="@+id/province_fragment_error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,7 +1,6 @@
 package com.ruben.covid_19_statistics_app.ui.views;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
     private static final String TAG = "RegionsFragment";
 
     private ListWithFinder listWithFinder;
-    private RegionsViewModel reportViewModel;
+    private RegionsViewModel regionsViewModel;
     private ProgressBar progressBar;
     private ErrorLayout errorLayout;
     private View root;
@@ -40,11 +39,11 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.regions_fragment, container, false);
-        reportViewModel = new ViewModelProvider((ViewModelStoreOwner) this, new ViewModelProvider.NewInstanceFactory()).get(RegionsViewModel.class);
+        regionsViewModel = new ViewModelProvider((ViewModelStoreOwner) this, new ViewModelProvider.NewInstanceFactory()).get(RegionsViewModel.class);
         bindViews();
         setListeners();
         prepareErrorLayout();
-        reportViewModel.getAllRegions();
+        regionsViewModel.getAllRegions();
         return root;
     }
 
@@ -54,28 +53,32 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
     }
 
     private void bindViews() {
-        listWithFinder = root.findViewById(R.id.regions_fragment_list_with_fander);
+        listWithFinder = root.findViewById(R.id.regions_fragment_list_with_finder);
         progressBar = root.findViewById(R.id.regions_fragment_progress_bar);
         errorLayout = root.findViewById(R.id.regions_fragment_error_layout);
     }
 
     private void setListeners() {
-        reportViewModel.getFinderItemsList().observe((LifecycleOwner) this, list -> {
+        regionsViewModel.getFinderItemsList().observe((LifecycleOwner) this, list -> {
             listWithFinder.setData(list, this);
             listWithFinder.setVisibility(View.VISIBLE);
         });
 
-        reportViewModel.getProgressBar().observe((LifecycleOwner) this, showPrgoressBar -> {
+        regionsViewModel.getProgressBar().observe((LifecycleOwner) this, showPrgoressBar -> {
             if(showPrgoressBar) {
+                listWithFinder.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
             } else {
                 progressBar.setVisibility(View.GONE);
             }
         });
 
-        reportViewModel.getErrorLayout().observe((LifecycleOwner) this, showErrorLayout -> {
+        regionsViewModel.getErrorLayout().observe((LifecycleOwner) this, showErrorLayout -> {
             if(showErrorLayout) {
+                listWithFinder.setVisibility(View.GONE);
                 errorLayout.setVisibility(View.VISIBLE);
+            } else {
+                errorLayout.setVisibility(View.GONE);
             }
         });
     }
@@ -84,19 +87,20 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
         errorLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Retry call button pressed");
+                regionsViewModel.getAllRegions();
             }
         });
     }
 
     @Override
     public void onItemSelected(int position) {
-        String iso = reportViewModel.countrySelected(position);
+        String iso = regionsViewModel.countrySelected(position);
         Bundle args = new Bundle();
         args.putString(AppConstants.ISO_KEY, iso);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.activity_main_frame_layout, ProvinceFragment.class, args, null)
+                .replace(R.id.activity_main_frame_layout, ProvinceFragment.class, args, ProvinceFragment.TAG)
+                .addToBackStack(RegionsFragment.TAG)
                 .commit();
     }
 }

@@ -14,8 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/toolbar_background"
-        android:backgroundTint="@color/toolbar_background"
+        android:backgroundTint="@color/app_background"
         android:layout_marginTop="30dp">
 
         <EditText
@@ -23,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Country..."
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:textColor="@color/field"
             android:background="@drawable/list_finder_shape"
             android:textColorHint="@color/field_secondary"
@@ -44,5 +43,40 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/list_with_finder_layout_find_toolbar_card_view"
         android:layout_marginTop="40dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/list_with_finder_layout_no_elements_find_wrapper"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/list_with_finder_layout_find_toolbar_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/no_elements_find_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="The country doesn't exists..."/>
+
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/no_elements_find_search_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_search_not_find"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"/>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

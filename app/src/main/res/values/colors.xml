@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red_error">#d32f2f</color>
-    <color name="app_background">#072e47</color>
+    <color name="app_background">#0077c2</color>
     <color name="progress_bar">#f28c0f</color>
     <color name="cardview_color">#0f446e</color>
     <color name="field">#cf5a1f</color>
@@ -17,4 +17,5 @@
     <color name="red">#ff6659</color>
     <color name="green">#76d275</color>
     <color name="blue">#80d6ff</color>
+    <color name="pop_up">#e0e0e0</color>
 </resources>

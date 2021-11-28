@@ -19,7 +19,7 @@
         />
 
     <com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinder
-        android:id="@+id/regions_fragment_list_with_fander"
+        android:id="@+id/regions_fragment_list_with_finder"
         android:layout_gravity="center_horizontal"
         android:visibility="gone"
         android:layout_width="match_parent"

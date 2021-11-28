@@ -30,6 +30,7 @@ public class ListWithFinder extends ConstraintLayout {
     private ListWithFinderRecyclerViewAdapter adapter;
     private ArrayList<ListWithFinderItem> items;
     private ArrayList<ListWithFinderItem> filteredItems;
+    private View noElementsFinds;
 
 
     public ListWithFinder(@NonNull Context context) {
@@ -63,16 +64,22 @@ public class ListWithFinder extends ConstraintLayout {
     private void bindViews() {
         etFinder = root.findViewById(R.id.list_with_finder_layout_edit_text);
         itemsRecyclerView = root.findViewById(R.id.list_with_finder_layout_recycler_view);
+        noElementsFinds = root.findViewById(R.id.list_with_finder_layout_no_elements_find_wrapper);
     }
 
     public void setData(ArrayList<ListWithFinderItem> items, IOnListWithFinderItemClicked listWithFinderItemClicked) {
-        this.items.addAll(items);
-        filteredItems.addAll(this.items);
-        adapter = new ListWithFinderRecyclerViewAdapter(filteredItems, listWithFinderItemClicked);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        itemsRecyclerView.setAdapter(adapter);
-        itemsRecyclerView.setLayoutManager(linearLayoutManager);
+        if(this.items.size() == 0) {
+            this.items.addAll(items);
+            filteredItems = new ArrayList<>();
+            filteredItems.addAll(this.items);
+            adapter = new ListWithFinderRecyclerViewAdapter(filteredItems, listWithFinderItemClicked);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+            itemsRecyclerView.setAdapter(adapter);
+            itemsRecyclerView.setLayoutManager(linearLayoutManager);
+        } else {
+            setDefaultState();
+        }
     }
 
     private void setListeners() {
@@ -93,6 +100,8 @@ public class ListWithFinder extends ConstraintLayout {
     }
 
     private void filterElements(String text) {
+        noElementsFinds.setVisibility(View.GONE);
+        itemsRecyclerView.setVisibility(View.VISIBLE);
         filteredItems.clear();
         if(text.trim().isEmpty()) {
             filteredItems.addAll(items);
@@ -105,6 +114,22 @@ public class ListWithFinder extends ConstraintLayout {
                  }
             }
         }
+        if(adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+
+        if(filteredItems.size() == 0) {
+            itemsRecyclerView.setVisibility(View.GONE);
+            noElementsFinds.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setDefaultState() {
+        noElementsFinds.setVisibility(View.GONE);
+        etFinder.setText(null);
+        filteredItems.clear();
+        filteredItems.addAll(items);
         adapter.notifyDataSetChanged();
+        itemsRecyclerView.setVisibility(View.VISIBLE);
     }
 }

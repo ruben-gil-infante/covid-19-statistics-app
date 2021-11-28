@@ -20,27 +20,61 @@ public class ReportsViewModel extends ViewModel {
 
     private GetReportsUseCase reportsUseCase;
     private MutableLiveData<ApiReportsItem> report;
+    private MutableLiveData<Boolean> progressBar;
+    private MutableLiveData<Boolean> showErrorLayout;
+
+    // Saved data to make the second call
+    private String iso;
+    private String date;
+    private String regionProvince;
+
+    boolean savedData = false;
 
     public ReportsViewModel() {
         reportsUseCase = new GetReportsUseCase();
         report = new MutableLiveData<>();
+        progressBar = new MutableLiveData<>();
+        showErrorLayout = new MutableLiveData<>();
     }
 
     public MutableLiveData<ApiReportsItem> getReports() {
         return report;
     }
 
+    public MutableLiveData<Boolean> getProgressBar() {
+        return progressBar;
+    }
+
+    public MutableLiveData<Boolean> getShowErrorLayout() { return showErrorLayout; }
+
+    public void getReport() {
+        getReport(iso, date, regionProvince);
+    }
+
     public void getReport(String iso, String date, String regionProvince) {
+        if(!savedData) {
+            this.iso = iso;
+            this.date = date;
+            this.regionProvince = regionProvince;
+        }
+        showErrorLayout.postValue(false);
+        progressBar.postValue(true);
         reportsUseCase.getReports(iso, date, regionProvince).enqueue(new Callback<ApiReports>() {
             @Override
             public void onResponse(Call<ApiReports> call, Response<ApiReports> response) {
                 // TODO: Add null pointer check
-                report.postValue(response.body().getApiReportsItemList().get(0));
+                progressBar.postValue(false);
+                if(response.body() == null) {
+                    showErrorLayout.postValue(true);
+                } else {
+                    report.postValue(response.body().getApiReportsItemList().get(0));
+                }
             }
 
             @Override
             public void onFailure(Call<ApiReports> call, Throwable t) {
-                int stopToDebug = 0;
+                progressBar.postValue(false);
+                showErrorLayout.postValue(true);
             }
         });
     }

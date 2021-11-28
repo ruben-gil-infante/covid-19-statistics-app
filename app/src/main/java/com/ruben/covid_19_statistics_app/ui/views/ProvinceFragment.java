@@ -18,16 +18,20 @@ import com.ruben.covid_19_statistics_app.constants.AppConstants;
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvinceItem;
 import com.ruben.covid_19_statistics_app.ui.adapters.ProvinceListAdapter;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ProvinceViewModel;
+import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
 
 import java.util.ArrayList;
 
 public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IOnProvinceSelected {
+
+    public static final String TAG = "ProvinceFragment";
 
     private ProvinceViewModel provinceViewModel;
     private ProgressBar progressBar;
     private View root;
     private String iso;
     private RecyclerView provinceListRecyclerView;
+    private ErrorLayout errorLayout;
 
     public static ProvinceFragment newInstance() {
         return new ProvinceFragment();
@@ -49,18 +53,25 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
     }
 
     private void bindViews() {
-        progressBar = root.findViewById(R.id.province_fragment_progress_bar);
+        progressBar = root.findViewById(R.id.report_fragment_progress_bar);
         provinceListRecyclerView = root.findViewById(R.id.province_fragment_provinces_list_recycler_view);
+        errorLayout = root.findViewById(R.id.province_fragment_error_layout);
     }
 
     private void setListeners() {
-
+        errorLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                provinceViewModel.getProvinceList();
+            }
+        });
     }
 
     private void setObservables() {
         provinceViewModel.getShowProgressBar().observe(getViewLifecycleOwner(), showProgressBar -> {
             if(showProgressBar) {
                 progressBar.setVisibility(View.VISIBLE);
+                provinceListRecyclerView.setVisibility(View.GONE);
             } else {
                 progressBar.setVisibility(View.GONE);
             }
@@ -68,6 +79,15 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
 
         provinceViewModel.getProvinceList().observe(getViewLifecycleOwner(), provinceList -> {
             setProvincesRecyclerView((ArrayList<ApiProvinceItem>) provinceList);
+        });
+
+        provinceViewModel.getShowErrorLayout().observe(getViewLifecycleOwner(), showErrorLayout -> {
+            if(showErrorLayout) {
+                errorLayout.setVisibility(View.VISIBLE);
+                provinceListRecyclerView.setVisibility(View.GONE);
+            } else {
+                errorLayout.setVisibility(View.GONE);
+            }
         });
     }
 
@@ -81,6 +101,7 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         provinceListRecyclerView.setLayoutManager(layoutManager);
+        provinceListRecyclerView.setVisibility(View.VISIBLE);
     }
 
 
@@ -93,7 +114,8 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
         args.putString(AppConstants.LONGITUDE_KEY, longitude);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.activity_main_frame_layout, ReportsFragment.class, args, null)
+                .replace(R.id.activity_main_frame_layout, ReportsFragment.class, args, ReportsFragment.TAG)
+                .addToBackStack(ProvinceFragment.TAG)
                 .commit();
     }
 }
