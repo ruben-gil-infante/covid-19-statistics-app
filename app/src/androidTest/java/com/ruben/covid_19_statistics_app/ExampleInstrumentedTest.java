@@ -49,25 +49,11 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.list_with_finder_layout_no_elements_find_wrapper)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void selectRegionTest() {
-        sleep();
-        onView(withHint("Country...")).perform(typeText("China"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
-    }
 
-    @Test
-    public void selectProvinceTest() {
-        sleep();
-        onView(withHint("Country...")).perform(typeText("China"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
-        sleep();
-        onView(withText("Anhui")).perform(click());
-    }
 
     // This test is a happy path test :)
     @Test
-    public void selectRegionAsFavourite() {
+    public void closeFavDialog() {
         sleep();
         onView(withHint("Country...")).perform(typeText("China"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.item_name)).perform(click());
@@ -75,5 +61,7 @@ public class ExampleInstrumentedTest {
         onView(withText("Anhui")).perform(click());
         sleep();
         onView(withId(R.id.report_fragment_star_button)).perform(click());
+        sleep();
+        onView(withId(R.id.available_in_future_versions_pop_up)).perform(click());
     }
 }
