@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvince;
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvinceItem;
+import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 import com.ruben.covid_19_statistics_app.useCases.GetAllProvincesUseCase;
 import com.ruben.covid_19_statistics_app.useCases.GetReportsUseCase;
 
@@ -63,8 +64,14 @@ public class ProvinceViewModel extends ViewModel {
                     showErrorLayout.postValue(true);
                 } else {
                     try {
-                        provincesList.postValue(response.body().getApiProvinceList().stream()
-                        .filter(provinceItem -> !provinceItem.getProvince().isEmpty() && provinceItem.getProvince().compareTo(ApiProvinceItem.UNKNOWN_PROVINCE) != 0).collect(Collectors.toList()));
+                        List<ApiProvinceItem> filteredItems = response.body().getApiProvinceList().stream()
+                                .filter(provinceItem -> !provinceItem.getProvince().isEmpty() && provinceItem.getProvince().compareTo(ApiProvinceItem.UNKNOWN_PROVINCE) != 0).collect(Collectors.toList());
+
+                        provincesList.postValue(filteredItems);
+
+                        if(filteredItems != null && filteredItems.isEmpty()) {
+                            showErrorLayout.postValue(true);
+                        }
                     }catch (Exception e) {
                         showErrorLayout.postValue(true);
                     }

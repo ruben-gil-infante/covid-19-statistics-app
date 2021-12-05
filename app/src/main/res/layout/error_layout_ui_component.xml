@@ -20,7 +20,7 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textColor="@color/white"
-            android:text="Something went wrong..."
+            android:text="@string/something_went_wrong"
             android:layout_marginBottom="20dp"
             />
 
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:text="Retry"
+            android:text="@string/retry"
             android:textAlignment="center"
             android:textColor="@color/blue"/>
 
