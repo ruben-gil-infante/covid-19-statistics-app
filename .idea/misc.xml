@@ -18,18 +18,20 @@
         <entry key="app/src/main/res/layout/error_layout_ui_component.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/fragment_province.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/fragment_region.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/google_maps_load_error.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_with_finder_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_with_finder_layout.xml" value="0.2493150684931507" />
         <entry key="app/src/main/res/layout/no_elements_find.xml" value="0.1" />
         <entry key="app/src/main/res/layout/not_available_function_yet.xml" value="0.263768115942029" />
+        <entry key="app/src/main/res/layout/not_available_function_yet_pop_up.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/province_fragment.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/province_list_item.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/province_selector_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/region_fragment.xml" value="0.18796296296296297" />
         <entry key="app/src/main/res/layout/region_selector_fragment.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/regions_fragment.xml" value="0.19791666666666666" />
-        <entry key="app/src/main/res/layout/report_fragment.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/report_fragment.xml" value="0.34794520547945207" />
         <entry key="uicomponents/src/main/res/layout/custom_spinner_layout.xml" value="0.19791666666666666" />
         <entry key="uicomponents/src/main/res/xml/custom_spinner.xml" value="0.19791666666666666" />
       </map>

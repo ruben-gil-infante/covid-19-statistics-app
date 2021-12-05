@@ -9,6 +9,7 @@ import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 import com.ruben.covid_19_statistics_app.network.reports.model.ApiReports;
 import com.ruben.covid_19_statistics_app.network.reports.model.ApiReportsItem;
 import com.ruben.covid_19_statistics_app.useCases.GetReportsUseCase;
+import com.ruben.covid_19_statistics_app.utils.DateUtils;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class ReportsViewModel extends ViewModel {
         report = new MutableLiveData<>();
         progressBar = new MutableLiveData<>();
         showErrorLayout = new MutableLiveData<>();
+        date = DateUtils.getParsedTodayDate();
     }
 
     public MutableLiveData<ApiReportsItem> getReports() {
@@ -48,10 +50,10 @@ public class ReportsViewModel extends ViewModel {
     public MutableLiveData<Boolean> getShowErrorLayout() { return showErrorLayout; }
 
     public void getReport() {
-        getReport(iso, date, regionProvince);
+        getReport(iso, regionProvince);
     }
 
-    public void getReport(String iso, String date, String regionProvince) {
+    public void getReport(String iso, String regionProvince) {
         if(!savedData) {
             this.iso = iso;
             this.date = date;
