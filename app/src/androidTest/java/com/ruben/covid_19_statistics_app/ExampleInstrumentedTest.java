@@ -87,4 +87,9 @@ public class ExampleInstrumentedTest {
         sleep();
         onView(withId(R.id.report_fragment_star_button)).perform(click());
     }
+
+    @Test
+    public void testRetryButtonFromErrorLayout() {
+        // TODO: Implement that test
+    }
 }

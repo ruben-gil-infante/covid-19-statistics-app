@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_background">
 
@@ -23,83 +22,30 @@
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/province_item_province_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Beijing"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:layout_weight="1"
                 android:textAlignment="textStart"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/white"
                 android:layout_marginBottom="3dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:layout_weight="4"
-                    android:gravity="center_vertical"
-                    android:textAlignment="textStart"
-                    android:text="Lat"
-                    android:textColor="@color/field"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/province_list_item_latitude"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:text="12.455"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:layout_weight="4"
-                    android:gravity="center_vertical"
-                    android:textAlignment="textStart"
-                    android:text="Lon"
-                    android:textColor="@color/field"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/province_list_item_logintude"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:text="203.123"
-                    />
-            </LinearLayout>
-
-
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_right_arrow"
+                android:layout_gravity="center_vertical|end"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

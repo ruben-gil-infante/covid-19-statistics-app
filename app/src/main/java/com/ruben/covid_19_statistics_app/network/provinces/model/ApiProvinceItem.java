@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApiProvinceItem {
 
+    public static final String UNKNOWN_PROVINCE = "Unknown";
+
     @SerializedName("iso")
     private String iso;
 
