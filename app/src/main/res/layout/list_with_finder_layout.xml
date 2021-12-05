@@ -68,7 +68,7 @@
             android:maxLines="1"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:text="The country doesn't exists..."/>
+            android:text="@string/the_country_doesnt_exists"/>
 
 
         <androidx.constraintlayout.utils.widget.ImageFilterView

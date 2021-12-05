@@ -13,4 +13,12 @@
     <string name="choose_the_province">Choose the province</string>
     <string name="retry">Retry</string>
     <string name="something_went_wrong">Something went wrong...</string>
+    <string name="todays_data">Today\'s data</string>
+    <string name="ubication">Ubication</string>
+    <string name="confirmed">confirmed</string>
+    <string name="deaths">deaths</string>
+    <string name="recovered">recovered</string>
+    <string name="could_not_load_the_map">Could not load the map</string>
+    <string name="the_country_doesnt_exists">The country doesn\'t exists...</string>
+    <string name="coming_soon">Coming soon... 😎 (tap to close)</string>
 </resources>

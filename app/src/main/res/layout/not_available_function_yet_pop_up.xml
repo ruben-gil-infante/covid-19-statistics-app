@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Coming soon... 😎 (tap to close)"
+        android:text="@string/coming_soon"
         android:textColor="@color/black"
         android:background="@drawable/not_available_function_pop_up_shape"
         android:paddingLeft="20dp"
