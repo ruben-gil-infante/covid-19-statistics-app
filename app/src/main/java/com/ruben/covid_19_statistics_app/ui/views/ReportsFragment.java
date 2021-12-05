@@ -34,6 +34,7 @@ public class ReportsFragment extends Fragment {
     private String regionProvince;
     private ProgressBar progressBar;
     private View wrapper;
+    private View mapErrorLayout;
 
     private TextView tvConfirmed;
     private TextView tvProvinceName;
@@ -89,6 +90,7 @@ public class ReportsFragment extends Fragment {
         progressBar = root.findViewById(R.id.report_fragment_progress_bar);
         wrapper = root.findViewById(R.id.report_fragment_wrapper);
         availableInFutureVersionsPopUp = root.findViewById(R.id.not_available_function_yet_text);
+        mapErrorLayout = root.findViewById(R.id.report_fragment_map_load_error_layout);
     }
 
     private void setListeners() {
@@ -145,21 +147,27 @@ public class ReportsFragment extends Fragment {
     }
 
     private void getData() {
-        reportsViewModel.getReport(iso, "2021-11-26", regionProvince);
+        reportsViewModel.getReport(iso, regionProvince);
     }
 
     private void setUpMap() {
         // MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.mapstyle_night);
-        googleMaps.onCreate(new Bundle());
-        googleMaps.onStart();
-        googleMaps.getMapAsync(google -> {
-            // google.setMapStyle(mapStyleOptions);
-            LatLng province = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-            google.addMarker(new MarkerOptions()
-                    .position(province)
-                    .title("Marker in " + regionProvince));
-            google.moveCamera(CameraUpdateFactory.newLatLngZoom(province, 10f));
-        });
+        try {
+            googleMaps.setVisibility(View.VISIBLE);
+            googleMaps.onCreate(new Bundle());
+            googleMaps.onStart();
+            googleMaps.getMapAsync(google -> {
+                // google.setMapStyle(mapStyleOptions);
+                LatLng province = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                google.addMarker(new MarkerOptions()
+                        .position(province)
+                        .title("Marker in " + regionProvince));
+                google.moveCamera(CameraUpdateFactory.newLatLngZoom(province, 10f));
+            });
+        } catch (Exception e) {
+            googleMaps.setVisibility(View.GONE);
+            mapErrorLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setProvinceAsFavourite() {

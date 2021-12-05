@@ -76,4 +76,15 @@ public class ExampleInstrumentedTest {
         sleep();
         onView(withId(R.id.report_fragment_star_button)).perform(click());
     }
+
+    @Test
+    public void closeFavDialog() {
+        sleep();
+        onView(withHint("Country...")).perform(typeText("China"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.item_name)).perform(click());
+        sleep();
+        onView(withText("Anhui")).perform(click());
+        sleep();
+        onView(withId(R.id.report_fragment_star_button)).perform(click());
+    }
 }

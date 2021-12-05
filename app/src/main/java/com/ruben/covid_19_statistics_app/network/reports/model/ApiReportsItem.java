@@ -19,7 +19,7 @@ public class ApiReportsItem {
     @SerializedName("confirmed_diff")
     private String confirmedDiff;
 
-    @SerializedName("recoered_diff")
+    @SerializedName("recovered_diff")
     private String recoveredDiff;
 
     @SerializedName("last_updated")
