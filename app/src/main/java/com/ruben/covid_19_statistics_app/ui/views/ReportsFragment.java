@@ -24,34 +24,46 @@ import com.ruben.covid_19_statistics_app.constants.AppConstants;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ReportsViewModel;
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ReportsFragment extends Fragment {
 
     public static final String TAG = "ReportsFragment";
 
     private ReportsViewModel reportsViewModel;
     private View root;
-    private View headerInfoWrapper;
-    private String regionProvince;
-    private ProgressBar progressBar;
-    private View wrapper;
-    private View mapErrorLayout;
-
-    private TextView tvConfirmed;
-    private TextView tvProvinceName;
-    private TextView tvLastUpdated;
-    private TextView tvDeaths;
-    private TextView tvRecovered;
-    private String iso;
-    private ImageView startBtn;
-
     private String latitude;
     private String longitude;
+    private String regionProvince;
+    String iso;
 
-    private ErrorLayout errorLayout;
-
-    private View availableInFutureVersionsPopUp;
-
-    private MapView googleMaps;
+    @BindView(R.id.report_fragment_info_wrapper)
+    View headerInfoWrapper;
+    @BindView(R.id.report_fragment_progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.report_fragment_wrapper)
+    View wrapper;
+    @BindView(R.id.report_fragment_map_load_error_layout)
+    View mapErrorLayout;
+    @BindView(R.id.report_fragment_confirmed_cases)
+    TextView tvConfirmed;
+    @BindView(R.id.report_fragment_province_name)
+    TextView tvProvinceName;
+    @BindView(R.id.report_fragment_last_update)
+    TextView tvLastUpdated;
+    @BindView(R.id.report_fragment_total_deaths)
+    TextView tvDeaths;
+    @BindView(R.id.report_fragment_recovered)
+    TextView tvRecovered;
+    @BindView(R.id.report_fragment_star_button)
+    ImageView startBtn;
+    @BindView(R.id.report_fragment_error_layout)
+    ErrorLayout errorLayout;
+    @BindView(R.id.not_available_function_yet_text)
+    View availableInFutureVersionsPopUp;
+    @BindView(R.id.report_fragment_map_view)
+    MapView googleMaps;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -61,8 +73,8 @@ public class ReportsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.report_fragment, container, false);
+        ButterKnife.bind(this, root);
         reportsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ReportsViewModel.class);
-        bindViews();
         setListeners();
         setObservables();
         if(getArguments() != null) {
@@ -75,22 +87,6 @@ public class ReportsFragment extends Fragment {
         getData();
         setUpMap();
         return root;
-    }
-
-    private void bindViews() {
-        headerInfoWrapper = root.findViewById(R.id.report_fragment_info_wrapper);
-        tvConfirmed = root.findViewById(R.id.report_fragment_confirmed_cases);
-        tvLastUpdated = root.findViewById(R.id.report_fragment_last_update);
-        tvDeaths = root.findViewById(R.id.report_fragment_total_deaths);
-        tvRecovered = root.findViewById(R.id.report_fragment_recovered);
-        tvProvinceName = root.findViewById(R.id.report_fragment_province_name);
-        googleMaps = root.findViewById(R.id.report_fragment_map_view);
-        startBtn = root.findViewById(R.id.report_fragment_star_button);
-        errorLayout = root.findViewById(R.id.report_fragment_error_layout);
-        progressBar = root.findViewById(R.id.report_fragment_progress_bar);
-        wrapper = root.findViewById(R.id.report_fragment_wrapper);
-        availableInFutureVersionsPopUp = root.findViewById(R.id.not_available_function_yet_text);
-        mapErrorLayout = root.findViewById(R.id.report_fragment_map_load_error_layout);
     }
 
     private void setListeners() {

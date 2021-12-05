@@ -22,15 +22,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ListWithFinder extends ConstraintLayout {
 
     private View root;
-    private EditText etFinder;
-    private RecyclerView itemsRecyclerView;
     private ListWithFinderRecyclerViewAdapter adapter;
     private ArrayList<ListWithFinderItem> items;
     private ArrayList<ListWithFinderItem> filteredItems;
-    private View noElementsFinds;
+
+    @BindView(R.id.list_with_finder_layout_edit_text)
+    EditText etFinder;
+    @BindView(R.id.list_with_finder_layout_recycler_view)
+    RecyclerView itemsRecyclerView;
+    @BindView(R.id.list_with_finder_layout_no_elements_find_wrapper)
+    View noElementsFinds;
+
 
 
     public ListWithFinder(@NonNull Context context) {
@@ -55,16 +63,10 @@ public class ListWithFinder extends ConstraintLayout {
 
     private void initViews() {
         root = inflate(getContext(), R.layout.list_with_finder_layout, this);
-        bindViews();
+        ButterKnife.bind(this, root);
         setListeners();
         items = new ArrayList<>();
         filteredItems = new ArrayList<>();
-    }
-
-    private void bindViews() {
-        etFinder = root.findViewById(R.id.list_with_finder_layout_edit_text);
-        itemsRecyclerView = root.findViewById(R.id.list_with_finder_layout_recycler_view);
-        noElementsFinds = root.findViewById(R.id.list_with_finder_layout_no_elements_find_wrapper);
     }
 
     public void setData(ArrayList<ListWithFinderItem> items, IOnListWithFinderItemClicked listWithFinderItemClicked) {
