@@ -23,6 +23,8 @@ android {
         buildConfigField "String", "API_KEY", localProperties['apiKey']
         buildConfigField "String", "API_HOST", localProperties['apiHost']
         buildConfigField "String", "BASE_URL", localProperties['baseUrl']
+
+        manifestPlaceholders = [MAPS_API_KEY: "${localProperties.getProperty('MAPS_API_KEY')}"]
     }
 
     buildTypes {
