@@ -8,12 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red_error">#d32f2f</color>
-    <color name="app_background">#0077c2</color>
+    <color name="app_background">#546e7a</color>
     <color name="progress_bar">#f28c0f</color>
-    <color name="cardview_color">#0f446e</color>
-    <color name="field">#cf5a1f</color>
+    <color name="cardview_color">#37474f</color>
+    <color name="field">#e0e0e0</color>
     <color name="field_secondary">#a1481b</color>
-    <color name="toolbar_background">#122336</color>
+    <color name="toolbar_background">#212121</color>
     <color name="red">#ff6659</color>
     <color name="green">#76d275</color>
     <color name="blue">#80d6ff</color>

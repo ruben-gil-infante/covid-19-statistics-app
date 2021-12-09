@@ -22,16 +22,23 @@ import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IOnProvinceSelected {
 
     public static final String TAG = "ProvinceFragment";
 
     private ProvinceViewModel provinceViewModel;
-    private ProgressBar progressBar;
     private View root;
     private String iso;
-    private RecyclerView provinceListRecyclerView;
-    private ErrorLayout errorLayout;
+
+    @BindView(R.id.report_fragment_progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.province_fragment_provinces_list_recycler_view)
+    RecyclerView provinceListRecyclerView;
+    @BindView(R.id.province_fragment_error_layout)
+    ErrorLayout errorLayout;
 
     public static ProvinceFragment newInstance() {
         return new ProvinceFragment();
@@ -41,8 +48,8 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.province_fragment, container, false);
+        ButterKnife.bind(this, root);
         provinceViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ProvinceViewModel.class);
-        bindViews();
         setListeners();
         setObservables();
         if(getArguments() != null) {
@@ -50,12 +57,6 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
         }
         getData();
         return root;
-    }
-
-    private void bindViews() {
-        progressBar = root.findViewById(R.id.report_fragment_progress_bar);
-        provinceListRecyclerView = root.findViewById(R.id.province_fragment_provinces_list_recycler_view);
-        errorLayout = root.findViewById(R.id.province_fragment_error_layout);
     }
 
     private void setListeners() {

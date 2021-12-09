@@ -47,4 +47,8 @@ public class ErrorLayout extends ConstraintLayout {
     public void setOnClickListener(OnClickListener onClickListener) {
         retryBtn.setOnClickListener(onClickListener);
     }
+
+    public void hideRetryBtn() {
+        retryBtn.setVisibility(View.GONE);
+    }
 }

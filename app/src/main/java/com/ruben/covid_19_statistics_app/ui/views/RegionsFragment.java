@@ -20,15 +20,25 @@ import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFin
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.RegionsViewModel;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RegionsFragment extends Fragment implements IOnListWithFinderItemClicked {
 
     private static final String TAG = "RegionsFragment";
 
-    private ListWithFinder listWithFinder;
-    private RegionsViewModel regionsViewModel;
-    private ProgressBar progressBar;
-    private ErrorLayout errorLayout;
     private View root;
+
+    @BindView(R.id.regions_fragment_list_with_finder)
+    ListWithFinder listWithFinder;
+
+    @BindView(R.id.regions_fragment_progress_bar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.regions_fragment_error_layout)
+    ErrorLayout errorLayout;
+
+    private RegionsViewModel regionsViewModel;
 
     public static RegionsFragment newInstance() {
         return new RegionsFragment();
@@ -39,8 +49,8 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
                              @Nullable Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.regions_fragment, container, false);
+        ButterKnife.bind(this, root);
         regionsViewModel = new ViewModelProvider((ViewModelStoreOwner) this, new ViewModelProvider.NewInstanceFactory()).get(RegionsViewModel.class);
-        bindViews();
         setListeners();
         prepareErrorLayout();
         regionsViewModel.getAllRegions();
@@ -50,12 +60,6 @@ public class RegionsFragment extends Fragment implements IOnListWithFinderItemCl
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    private void bindViews() {
-        listWithFinder = root.findViewById(R.id.regions_fragment_list_with_finder);
-        progressBar = root.findViewById(R.id.regions_fragment_progress_bar);
-        errorLayout = root.findViewById(R.id.regions_fragment_error_layout);
     }
 
     private void setListeners() {

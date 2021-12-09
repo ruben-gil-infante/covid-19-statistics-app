@@ -1,15 +1,20 @@
 package com.ruben.covid_19_statistics_app.ui.viewmodels;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvince;
 import com.ruben.covid_19_statistics_app.network.provinces.model.ApiProvinceItem;
+import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 import com.ruben.covid_19_statistics_app.useCases.GetAllProvincesUseCase;
+import com.ruben.covid_19_statistics_app.useCases.GetReportsUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,9 +60,21 @@ public class ProvinceViewModel extends ViewModel {
             public void onResponse(Call<ApiProvince> call, Response<ApiProvince> response) {
                 showProgressBar.postValue(false);
                 if(response.body() == null) {
+                    // TODO: Implement retry button function when an error occurs
                     showErrorLayout.postValue(true);
                 } else {
-                    provincesList.postValue(response.body().getApiProvinceList());
+                    try {
+                        List<ApiProvinceItem> filteredItems = response.body().getApiProvinceList().stream()
+                                .filter(provinceItem -> !provinceItem.getProvince().isEmpty() && provinceItem.getProvince().compareTo(ApiProvinceItem.UNKNOWN_PROVINCE) != 0).collect(Collectors.toList());
+
+                        provincesList.postValue(filteredItems);
+
+                        if(filteredItems != null && filteredItems.isEmpty()) {
+                            showErrorLayout.postValue(true);
+                        }
+                    }catch (Exception e) {
+                        showErrorLayout.postValue(true);
+                    }
                 }
             }
 

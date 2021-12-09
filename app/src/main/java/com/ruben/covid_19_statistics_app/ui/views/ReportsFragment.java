@@ -1,5 +1,6 @@
 package com.ruben.covid_19_statistics_app.ui.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +22,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ruben.covid_19_statistics_app.R;
 import com.ruben.covid_19_statistics_app.constants.AppConstants;
+import com.ruben.covid_19_statistics_app.network.reports.model.ApiReportsItem;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ReportsViewModel;
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
+import com.ruben.covid_19_statistics_app.utils.NumberUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ReportsFragment extends Fragment {
 
@@ -30,28 +36,40 @@ public class ReportsFragment extends Fragment {
 
     private ReportsViewModel reportsViewModel;
     private View root;
-    private View headerInfoWrapper;
-    private String regionProvince;
-    private ProgressBar progressBar;
-    private View wrapper;
-    private View mapErrorLayout;
-
-    private TextView tvConfirmed;
-    private TextView tvProvinceName;
-    private TextView tvLastUpdated;
-    private TextView tvDeaths;
-    private TextView tvRecovered;
-    private String iso;
-    private ImageView startBtn;
-
     private String latitude;
     private String longitude;
+    private String regionProvince;
+    private ApiReportsItem reportItem;
+    String iso;
 
-    private ErrorLayout errorLayout;
-
-    private View availableInFutureVersionsPopUp;
-
-    private MapView googleMaps;
+    @BindView(R.id.report_fragment_info_wrapper)
+    View headerInfoWrapper;
+    @BindView(R.id.report_fragment_progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.report_fragment_wrapper)
+    View wrapper;
+    @BindView(R.id.report_fragment_map_load_error_layout)
+    View mapErrorLayout;
+    @BindView(R.id.report_fragment_confirmed_cases)
+    TextView tvConfirmed;
+    @BindView(R.id.report_fragment_province_name)
+    TextView tvProvinceName;
+    @BindView(R.id.report_fragment_last_update)
+    TextView tvLastUpdated;
+    @BindView(R.id.report_fragment_total_deaths)
+    TextView tvDeaths;
+    @BindView(R.id.report_fragment_recovered)
+    TextView tvRecovered;
+    @BindView(R.id.report_fragment_star_button)
+    ImageView startBtn;
+    @BindView(R.id.report_fragment_error_layout)
+    ErrorLayout errorLayout;
+    @BindView(R.id.not_available_function_yet_text)
+    View availableInFutureVersionsPopUp;
+    @BindView(R.id.report_fragment_map_view)
+    MapView googleMaps;
+    @BindView(R.id.report_fragment_see_more_data_btn)
+    TextView seeMoreData;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -61,8 +79,8 @@ public class ReportsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.report_fragment, container, false);
+        ButterKnife.bind(this, root);
         reportsViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(ReportsViewModel.class);
-        bindViews();
         setListeners();
         setObservables();
         if(getArguments() != null) {
@@ -75,22 +93,6 @@ public class ReportsFragment extends Fragment {
         getData();
         setUpMap();
         return root;
-    }
-
-    private void bindViews() {
-        headerInfoWrapper = root.findViewById(R.id.report_fragment_info_wrapper);
-        tvConfirmed = root.findViewById(R.id.report_fragment_confirmed_cases);
-        tvLastUpdated = root.findViewById(R.id.report_fragment_last_update);
-        tvDeaths = root.findViewById(R.id.report_fragment_total_deaths);
-        tvRecovered = root.findViewById(R.id.report_fragment_recovered);
-        tvProvinceName = root.findViewById(R.id.report_fragment_province_name);
-        googleMaps = root.findViewById(R.id.report_fragment_map_view);
-        startBtn = root.findViewById(R.id.report_fragment_star_button);
-        errorLayout = root.findViewById(R.id.report_fragment_error_layout);
-        progressBar = root.findViewById(R.id.report_fragment_progress_bar);
-        wrapper = root.findViewById(R.id.report_fragment_wrapper);
-        availableInFutureVersionsPopUp = root.findViewById(R.id.not_available_function_yet_text);
-        mapErrorLayout = root.findViewById(R.id.report_fragment_map_load_error_layout);
     }
 
     private void setListeners() {
@@ -114,11 +116,19 @@ public class ReportsFragment extends Fragment {
                 hideNotAvailablePopUp();
             }
         });
+
+        seeMoreData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seeMoreData();
+            }
+        });
     }
 
     private void setObservables() {
         reportsViewModel.getReports().observe(getViewLifecycleOwner(), reports -> {
-            tvDeaths.setText(reports.getDeaths());
+            reportItem = reports;
+            tvDeaths.setText(reports.getDeaths() + " " + NumberUtils.makeThePercentage(reports.getFatalityRate()));
             tvConfirmed.setText(reports.getConfirmedDiff());
             tvRecovered.setText(reports.getRecoveredDiff());
             tvProvinceName.setText(regionProvince);
@@ -162,7 +172,7 @@ public class ReportsFragment extends Fragment {
                 google.addMarker(new MarkerOptions()
                         .position(province)
                         .title("Marker in " + regionProvince));
-                google.moveCamera(CameraUpdateFactory.newLatLngZoom(province, 10f));
+                google.moveCamera(CameraUpdateFactory.newLatLngZoom(province, 5f));
             });
         } catch (Exception e) {
             googleMaps.setVisibility(View.GONE);
@@ -195,5 +205,11 @@ public class ReportsFragment extends Fragment {
         ));
         startBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_not_selected));
         availableInFutureVersionsPopUp.setVisibility(View.GONE);
+    }
+
+    private void seeMoreData() {
+        Intent intent = new Intent(getActivity(), ReportsChartActivity.class);
+        intent.putExtra(AppConstants.REPORT_DATA, reportItem);
+        getActivity().startActivity(intent);
     }
 }

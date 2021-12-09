@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.ruben.covid_19_statistics_app.R;
 
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
 
