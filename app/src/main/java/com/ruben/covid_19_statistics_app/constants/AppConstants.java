@@ -8,4 +8,5 @@ public class AppConstants {
     public static final String PROVINCE_NAME_KEY = "PROVINCE_NAME_KEY";
     public static final String LATITUDE_KEY = "LATITUDE_KEY";
     public static final String LONGITUDE_KEY = "LONGITUDE_KEY";
+    public static final String REPORT_DATA = "REPORT_DATA";
 }

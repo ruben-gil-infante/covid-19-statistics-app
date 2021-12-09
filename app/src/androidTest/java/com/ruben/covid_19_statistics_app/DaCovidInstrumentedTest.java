@@ -52,27 +52,19 @@ public class DaCovidInstrumentedTest {
 
     @Test
     public void selectRegionTest() {
-        sleep();
-        onView(withHint(R.string.enter_the_country)).perform(typeText("China"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
+        findCountryInToolbarAndSelectedIt("China");
     }
 
     @Test
     public void selectProvinceTest() {
-        sleep();
-        onView(withHint(R.string.enter_the_country)).perform(typeText("China"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
-        sleep();
+        findCountryInToolbarAndSelectedIt("China");
         onView(withText(R.string.anhui)).perform(click());
     }
 
     // This test is a happy path test :)
     @Test
     public void selectRegionAsFavourite() {
-        sleep();
-        onView(withHint(R.string.enter_the_country)).perform(typeText("China"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
-        sleep();
+        findCountryInToolbarAndSelectedIt("China");
         onView(withText(R.string.anhui)).perform(click());
         sleep();
         onView(withId(R.id.report_fragment_star_button)).perform(click());
@@ -80,10 +72,7 @@ public class DaCovidInstrumentedTest {
 
     @Test
     public void closeFavDialog() {
-        sleep();
-        onView(withHint(R.string.enter_the_country)).perform(typeText("China"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
-        sleep();
+        findCountryInToolbarAndSelectedIt("China");
         onView(withText(R.string.anhui)).perform(click());
         sleep();
         onView(withId(R.id.report_fragment_star_button)).perform(click());
@@ -91,13 +80,26 @@ public class DaCovidInstrumentedTest {
 
     @Test
     public void testRetryButtonFromErrorLayout() {
-        // TODO: Implement that test
-        sleep();
-        onView(withHint(R.string.enter_the_country)).perform(typeText("Thailand"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.item_name)).perform(click());
-        sleep();
+        findCountryInToolbarAndSelectedIt("Thailand");
         onView(withText(R.string.retry)).perform(click());
         sleep();
         onView(withText(R.string.something_went_wrong)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void seeMoreData() {
+        findCountryInToolbarAndSelectedIt("China");
+        onView(withText(R.string.anhui)).perform(click());
+        sleep();
+        onView(withText(R.string.see_more_data)).perform(click());
+        onView(withId(R.id.activity_reports_chart_all_active)).check(matches(isDisplayed()));
+    }
+
+    private void findCountryInToolbarAndSelectedIt(String country) {
+        sleep();
+        onView(withHint(R.string.enter_the_country)).perform(typeText(country), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.item_name)).perform(click());
+        sleep();
+    }
+
 }

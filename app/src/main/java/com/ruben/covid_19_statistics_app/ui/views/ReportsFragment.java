@@ -1,5 +1,6 @@
 package com.ruben.covid_19_statistics_app.ui.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +22,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ruben.covid_19_statistics_app.R;
 import com.ruben.covid_19_statistics_app.constants.AppConstants;
+import com.ruben.covid_19_statistics_app.network.reports.model.ApiReportsItem;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ReportsViewModel;
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
+import com.ruben.covid_19_statistics_app.utils.NumberUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +39,7 @@ public class ReportsFragment extends Fragment {
     private String latitude;
     private String longitude;
     private String regionProvince;
+    private ApiReportsItem reportItem;
     String iso;
 
     @BindView(R.id.report_fragment_info_wrapper)
@@ -64,6 +68,8 @@ public class ReportsFragment extends Fragment {
     View availableInFutureVersionsPopUp;
     @BindView(R.id.report_fragment_map_view)
     MapView googleMaps;
+    @BindView(R.id.report_fragment_see_more_data_btn)
+    TextView seeMoreData;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -110,11 +116,19 @@ public class ReportsFragment extends Fragment {
                 hideNotAvailablePopUp();
             }
         });
+
+        seeMoreData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seeMoreData();
+            }
+        });
     }
 
     private void setObservables() {
         reportsViewModel.getReports().observe(getViewLifecycleOwner(), reports -> {
-            tvDeaths.setText(reports.getDeaths());
+            reportItem = reports;
+            tvDeaths.setText(reports.getDeaths() + " " + NumberUtils.makeThePercentage(reports.getFatalityRate()));
             tvConfirmed.setText(reports.getConfirmedDiff());
             tvRecovered.setText(reports.getRecoveredDiff());
             tvProvinceName.setText(regionProvince);
@@ -158,7 +172,7 @@ public class ReportsFragment extends Fragment {
                 google.addMarker(new MarkerOptions()
                         .position(province)
                         .title("Marker in " + regionProvince));
-                google.moveCamera(CameraUpdateFactory.newLatLngZoom(province, 10f));
+                google.moveCamera(CameraUpdateFactory.newLatLngZoom(province, 5f));
             });
         } catch (Exception e) {
             googleMaps.setVisibility(View.GONE);
@@ -191,5 +205,11 @@ public class ReportsFragment extends Fragment {
         ));
         startBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_not_selected));
         availableInFutureVersionsPopUp.setVisibility(View.GONE);
+    }
+
+    private void seeMoreData() {
+        Intent intent = new Intent(getActivity(), ReportsChartActivity.class);
+        intent.putExtra(AppConstants.REPORT_DATA, reportItem);
+        getActivity().startActivity(intent);
     }
 }

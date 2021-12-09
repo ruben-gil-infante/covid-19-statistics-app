@@ -81,4 +81,8 @@ public class ReportsViewModel extends ViewModel {
         });
     }
 
+    public ApiReportsItem getReportItem() {
+        return report.getValue();
+    }
+
 }

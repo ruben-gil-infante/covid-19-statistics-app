@@ -11,6 +11,10 @@
         android:roundIcon="@drawable/ic_dacovid_launcher_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Covid19statisticsapp">
+        <activity
+            android:name=".ui.views.ReportsChartActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAlaqKgkUje_5qbGabX_1ZdXqiu6H6rkn8" />

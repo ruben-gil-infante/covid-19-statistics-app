@@ -1,8 +1,11 @@
 package com.ruben.covid_19_statistics_app.network.reports.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ApiReportsItem {
+public class ApiReportsItem implements Parcelable {
 
     @SerializedName("date")
     private String date;
@@ -22,7 +25,7 @@ public class ApiReportsItem {
     @SerializedName("recovered_diff")
     private String recoveredDiff;
 
-    @SerializedName("last_updated")
+    @SerializedName("last_update")
     private String lastUpdated;
 
     @SerializedName("active")
@@ -113,4 +116,48 @@ public class ApiReportsItem {
     public void setFatalityRate(String fatalityRate) {
         this.fatalityRate = fatalityRate;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(date);
+        dest.writeString(confirmed);
+        dest.writeString(deaths);
+        dest.writeString(recovered);
+        dest.writeString(confirmedDiff);
+        dest.writeString(recoveredDiff);
+        dest.writeString(lastUpdated);
+        dest.writeString(active);
+        dest.writeString(activeDiff);
+        dest.writeString(fatalityRate);
+    }
+
+    protected ApiReportsItem(Parcel in) {
+        date = in.readString();
+        confirmed = in.readString();
+        deaths = in.readString();
+        recovered = in.readString();
+        confirmedDiff = in.readString();
+        recoveredDiff = in.readString();
+        lastUpdated = in.readString();
+        active = in.readString();
+        activeDiff = in.readString();
+        fatalityRate = in.readString();
+    }
+
+    public static final Creator<ApiReportsItem> CREATOR = new Creator<ApiReportsItem>() {
+        @Override
+        public ApiReportsItem createFromParcel(Parcel in) {
+            return new ApiReportsItem(in);
+        }
+
+        @Override
+        public ApiReportsItem[] newArray(int size) {
+            return new ApiReportsItem[size];
+        }
+    };
 }
