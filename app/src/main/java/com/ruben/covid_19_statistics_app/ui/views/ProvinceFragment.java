@@ -33,7 +33,7 @@ public class ProvinceFragment extends Fragment implements ProvinceListAdapter.IO
     private View root;
     private String iso;
 
-    @BindView(R.id.report_fragment_progress_bar)
+    @BindView(R.id.province_fragment_progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.province_fragment_provinces_list_recycler_view)
     RecyclerView provinceListRecyclerView;

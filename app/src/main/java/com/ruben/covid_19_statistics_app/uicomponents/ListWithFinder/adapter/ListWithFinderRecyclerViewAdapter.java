@@ -1,4 +1,4 @@
-package com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder;
+package com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruben.covid_19_statistics_app.R;
+import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.IOnListWithFinderItemClicked;
+import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.model.ListWithFinderItem;
 
 import java.util.ArrayList;
 

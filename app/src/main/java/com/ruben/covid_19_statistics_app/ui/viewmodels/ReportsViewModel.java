@@ -56,7 +56,6 @@ public class ReportsViewModel extends ViewModel {
     public void getReport(String iso, String regionProvince) {
         if(!savedData) {
             this.iso = iso;
-            this.date = date;
             this.regionProvince = regionProvince;
         }
         showErrorLayout.postValue(false);
@@ -66,7 +65,7 @@ public class ReportsViewModel extends ViewModel {
             public void onResponse(Call<ApiReports> call, Response<ApiReports> response) {
                 // TODO: Add null pointer check
                 progressBar.postValue(false);
-                if(response.body() == null) {
+                if(response.body() == null || response.body().getApiReportsItemList().isEmpty()) {
                     showErrorLayout.postValue(true);
                 } else {
                     report.postValue(response.body().getApiReportsItemList().get(0));
@@ -79,6 +78,11 @@ public class ReportsViewModel extends ViewModel {
                 showErrorLayout.postValue(true);
             }
         });
+    }
+
+    public void getReport(String date) {
+        this.date = date;
+        getReport();
     }
 
     public ApiReportsItem getReportItem() {

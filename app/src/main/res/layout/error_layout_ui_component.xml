@@ -39,7 +39,7 @@
             android:textSize="30dp"
             android:text="@string/retry"
             android:textAlignment="center"
-            android:textColor="@color/blue"/>
+            android:textColor="@color/white"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

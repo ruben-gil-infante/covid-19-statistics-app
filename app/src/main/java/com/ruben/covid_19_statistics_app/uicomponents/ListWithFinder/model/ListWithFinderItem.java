@@ -1,4 +1,4 @@
-package com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder;
+package com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.model;
 
 public class ListWithFinderItem {
 

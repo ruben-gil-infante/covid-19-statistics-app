@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red_error">#d32f2f</color>
+    <color name="red_error">#ef5350</color>
     <color name="app_background">#546e7a</color>
     <color name="progress_bar">#f28c0f</color>
     <color name="cardview_color">#37474f</color>
