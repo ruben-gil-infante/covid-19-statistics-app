@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegionItem;
 import com.ruben.covid_19_statistics_app.network.regions.model.ApiRegions;
-import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.ListWithFinderItem;
+import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.model.ListWithFinderItem;
 import com.ruben.covid_19_statistics_app.useCases.GetRegionsUseCase;
 
 import java.util.ArrayList;

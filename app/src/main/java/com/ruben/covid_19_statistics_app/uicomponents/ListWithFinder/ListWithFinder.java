@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,12 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruben.covid_19_statistics_app.R;
+import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.adapter.ListWithFinderRecyclerViewAdapter;
+import com.ruben.covid_19_statistics_app.uicomponents.ListWithFinder.model.ListWithFinderItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,12 +1,13 @@
 package com.ruben.covid_19_statistics_app.ui.views;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.ruben.covid_19_statistics_app.R;
 import com.ruben.covid_19_statistics_app.constants.AppConstants;
 import com.ruben.covid_19_statistics_app.network.reports.model.ApiReportsItem;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ReportsViewModel;
+import com.ruben.covid_19_statistics_app.uicomponents.datepicker.DatePickerFragment;
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
 import com.ruben.covid_19_statistics_app.utils.NumberUtils;
 
@@ -44,7 +46,7 @@ public class ReportsFragment extends Fragment {
 
     @BindView(R.id.report_fragment_info_wrapper)
     View headerInfoWrapper;
-    @BindView(R.id.report_fragment_progress_bar)
+    @BindView(R.id.province_fragment_progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.report_fragment_wrapper)
     View wrapper;
@@ -70,6 +72,8 @@ public class ReportsFragment extends Fragment {
     MapView googleMaps;
     @BindView(R.id.report_fragment_see_more_data_btn)
     TextView seeMoreData;
+    @BindView(R.id.report_fragment_calendar_btn)
+    ImageView calendarBtn;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -121,6 +125,22 @@ public class ReportsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 seeMoreData();
+            }
+        });
+
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*DatePickerFragment datePickerFragment = new DatePickerFragment();
+                datePickerFragment.setOnDataSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    }
+                });
+                datePickerFragment.show(getActivity().getSupportFragmentManager(), "date picker");
+
+                 */
             }
         });
     }

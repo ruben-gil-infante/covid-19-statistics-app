@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // TODO: id of the view to make the fragment commit transaction -> activity_main_frame_layout
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.
                 beginTransaction().
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // TODO: Implement the navigation between fragments
         super.onBackPressed();
     }
 }

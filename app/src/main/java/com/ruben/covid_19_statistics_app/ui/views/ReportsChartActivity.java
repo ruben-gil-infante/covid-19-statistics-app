@@ -2,6 +2,7 @@ package com.ruben.covid_19_statistics_app.ui.views;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,8 @@ public class ReportsChartActivity extends AppCompatActivity {
     TextView tvAllRecovered;
     @BindView(R.id.activity_reports_chart_last_update)
     TextView tvLastUpdate;
+    @BindView(R.id.activity_reports_chart_root)
+    ConstraintLayout root;
 
 
     @Override
@@ -59,6 +62,7 @@ public class ReportsChartActivity extends AppCompatActivity {
             reportItem = getIntent().getParcelableExtra(AppConstants.REPORT_DATA);
         }
         setData();
+        animateEnter();
     }
 
     private void setData() {
@@ -78,5 +82,12 @@ public class ReportsChartActivity extends AppCompatActivity {
             tvLastUpdate.setText(getResources().getString(R.string.last_update)
             + " " + (reportItem.getLastUpdated() == null ? " - " : reportItem.getLastUpdated()));
         }
+    }
+
+    private void animateEnter() {
+        root.startAnimation(AnimationUtils.loadAnimation(
+                this,
+                R.anim.slide_in_right
+        ));
     }
 }
