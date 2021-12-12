@@ -22,4 +22,20 @@
     <style name="Theme.Covid19statisticsapp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Covid19statisticsapp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- this is new -->
+        <item name="colorAccent">@color/app_background</item>
+
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+        <item name="android:colorAccent">@color/app_background</item>
+    </style>
+
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/app_background</item>
+        <item name="android:dayOfWeekBackground">@color/app_background</item>
+        <item name="android:yearListSelectorColor">@color/app_background</item>
+        <item name="android:datePickerMode">calendar</item>
+        <item name="android:minDate">01/01/2020</item>
+    </style>
 </resources>

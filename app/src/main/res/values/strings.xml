@@ -35,4 +35,6 @@
     <string name="all_data">All data</string>
     <string name="active">active</string>
     <string name="last_update">last update: </string>
+    <string name="choose_another_date">Choose another date</string>
+    <string name="data_from">Data from</string>
 </resources>

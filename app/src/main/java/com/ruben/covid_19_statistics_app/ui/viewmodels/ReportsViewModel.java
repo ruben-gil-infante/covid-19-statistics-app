@@ -56,7 +56,6 @@ public class ReportsViewModel extends ViewModel {
     public void getReport(String iso, String regionProvince) {
         if(!savedData) {
             this.iso = iso;
-            this.date = date;
             this.regionProvince = regionProvince;
         }
         showErrorLayout.postValue(false);
@@ -79,6 +78,11 @@ public class ReportsViewModel extends ViewModel {
                 showErrorLayout.postValue(true);
             }
         });
+    }
+
+    public void getReport(String date) {
+        this.date = date;
+        getReport();
     }
 
     public ApiReportsItem getReportItem() {

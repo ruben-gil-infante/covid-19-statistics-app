@@ -74,7 +74,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/ic_star_not_selected" />
+                android:src="@drawable/ic_star_not_selected"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -97,14 +98,15 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/report_fragment_data_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textStart"
-                    android:text="@string/todays_data"
-                    android:textSize="25dp"
-                    android:textColor="@color/white"
                     android:layout_centerInParent="true"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/data_from"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
 
                 <ImageView
                     android:id="@+id/report_fragment_calendar_btn"

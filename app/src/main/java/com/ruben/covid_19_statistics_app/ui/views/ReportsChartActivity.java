@@ -47,10 +47,10 @@ public class ReportsChartActivity extends AppCompatActivity {
     TextView tvRecovered;
     @BindView(R.id.activity_reports_chart_all_recovered)
     TextView tvAllRecovered;
-    @BindView(R.id.activity_reports_chart_last_update)
-    TextView tvLastUpdate;
     @BindView(R.id.activity_reports_chart_root)
     ConstraintLayout root;
+    @BindView(R.id.activity_reports_chart_data_title)
+    TextView dataTitle;
 
 
     @Override
@@ -79,8 +79,7 @@ public class ReportsChartActivity extends AppCompatActivity {
             tvAllConfirmed.setText(reportItem.getConfirmed());
             tvRecovered.setText(reportItem.getRecovered());
             tvAllRecovered.setText(reportItem.getRecoveredDiff());
-            tvLastUpdate.setText(getResources().getString(R.string.last_update)
-            + " " + (reportItem.getLastUpdated() == null ? " - " : reportItem.getLastUpdated()));
+            dataTitle.setText(dataTitle.getText() + " " + reportItem.getDate());
         }
     }
 

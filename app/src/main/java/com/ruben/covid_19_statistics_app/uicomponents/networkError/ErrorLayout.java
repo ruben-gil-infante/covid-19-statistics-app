@@ -10,10 +10,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.ruben.covid_19_statistics_app.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ErrorLayout extends ConstraintLayout {
 
-    private TextView retryBtn;
-    private View root;
+    @BindView(R.id.error_layout_ui_component_retry_btn)
+    TextView retryBtn;
 
     public ErrorLayout(Context context) {
         super(context);
@@ -36,12 +39,8 @@ public class ErrorLayout extends ConstraintLayout {
     }
 
     private void initView() {
-      root = inflate(getContext(), R.layout.error_layout_ui_component, this);
-      bindViews();
-    }
-
-    private void bindViews() {
-        retryBtn = root.findViewById(R.id.error_layout_ui_component_retry_btn);
+        View root = inflate(getContext(), R.layout.error_layout_ui_component, this);
+        ButterKnife.bind(root);
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {

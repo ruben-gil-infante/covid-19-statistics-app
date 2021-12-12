@@ -3,6 +3,7 @@ package com.ruben.covid_19_statistics_app.ui.views;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,9 @@ import com.ruben.covid_19_statistics_app.R;
 import com.ruben.covid_19_statistics_app.constants.AppConstants;
 import com.ruben.covid_19_statistics_app.network.reports.model.ApiReportsItem;
 import com.ruben.covid_19_statistics_app.ui.viewmodels.ReportsViewModel;
-import com.ruben.covid_19_statistics_app.uicomponents.datepicker.DatePickerFragment;
+import com.ruben.covid_19_statistics_app.uicomponents.datepicker.CustomDatePicker;
 import com.ruben.covid_19_statistics_app.uicomponents.networkError.ErrorLayout;
+import com.ruben.covid_19_statistics_app.utils.DateUtils;
 import com.ruben.covid_19_statistics_app.utils.NumberUtils;
 
 import butterknife.BindView;
@@ -74,6 +76,8 @@ public class ReportsFragment extends Fragment {
     TextView seeMoreData;
     @BindView(R.id.report_fragment_calendar_btn)
     ImageView calendarBtn;
+    @BindView(R.id.report_fragment_data_title)
+    TextView dataTitle;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -110,7 +114,7 @@ public class ReportsFragment extends Fragment {
         errorLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reportsViewModel.getReport();
+                calendarBtn.callOnClick();
             }
         });
 
@@ -131,16 +135,16 @@ public class ReportsFragment extends Fragment {
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*DatePickerFragment datePickerFragment = new DatePickerFragment();
-                datePickerFragment.setOnDataSetListener(new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+                CustomDatePicker customDatePicker = new CustomDatePicker();
+                customDatePicker.setOnDataSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        String parsedDate = DateUtils.parseDate(year, month, day);
+                        reportsViewModel.getReport(parsedDate);
                     }
                 });
-                datePickerFragment.show(getActivity().getSupportFragmentManager(), "date picker");
-
-                 */
+                customDatePicker.show(getActivity().getSupportFragmentManager(), "date picker");
             }
         });
     }
@@ -153,7 +157,7 @@ public class ReportsFragment extends Fragment {
             tvRecovered.setText(reports.getRecoveredDiff());
             tvProvinceName.setText(regionProvince);
             wrapper.setVisibility(View.VISIBLE);
-            // last updated --> data displayed in future versions
+            dataTitle.setText(getResources().getString(R.string.data_from) + " " + reports.getDate());
         });
 
         reportsViewModel.getProgressBar().observe(getViewLifecycleOwner(), showProgressBar -> {
